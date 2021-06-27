@@ -9,34 +9,37 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class CategoryCommandToCategoryTest {
 
-    public static final Long ID = 1L;
+    public static final String ID_VALUE = "1";
     public static final String DESCRIPTION = "description";
-
-    CategoryCommandToCategory converter;
+    CategoryCommandToCategory conveter;
 
     @BeforeEach
-    void setUp() {
-        converter = new CategoryCommandToCategory();
+    public void setUp() throws Exception {
+        conveter = new CategoryCommandToCategory();
     }
 
     @Test
-    void convertWithNull() {
-        assertNull(converter.convert(null));
+    public void testNullObject() throws Exception {
+        assertNull(conveter.convert(null));
     }
 
     @Test
-    void convertWithEmpty() {
-        assertNotNull(converter.convert(new CategoryCommand()));
+    public void testEmptyObject() throws Exception {
+        assertNotNull(conveter.convert(new CategoryCommand()));
     }
 
     @Test
-    void convert() {
+    public void convert() throws Exception {
+        //given
         CategoryCommand categoryCommand = new CategoryCommand();
-        categoryCommand.setId(ID);
+        categoryCommand.setId(ID_VALUE);
         categoryCommand.setDescription(DESCRIPTION);
 
-        Category category = converter.convert(categoryCommand);
-        assertEquals(ID, category.getId());
+        //when
+        Category category = conveter.convert(categoryCommand);
+
+        //then
+        assertEquals(ID_VALUE, category.getId());
         assertEquals(DESCRIPTION, category.getDescription());
     }
 }
