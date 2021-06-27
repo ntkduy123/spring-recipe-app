@@ -37,10 +37,8 @@ jobs:
             - ~/.m2
           key: v1-dependencies-{{ checksum "pom.xml" }}
 
-      - run: mvn test
-
       - store_artifacts:
-          path:  target
+          path: target
 
       - run:
           name: Send to CodeCov
